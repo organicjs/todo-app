@@ -1,0 +1,10 @@
+<% if(message) { %>
+<p style=color: #cd5c5c"><strong><%= message %></strong></p>
+<% } %>
+
+<form method="post">
+    <input type="text" name="username" placeholder="Username" autocomplete="off">
+    <input type="password" name="password" placeholder="Password" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= locals._csrf %>">
+    <input type="submit">
+</form>

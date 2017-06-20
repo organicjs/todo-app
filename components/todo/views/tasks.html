@@ -1,0 +1,32 @@
+<% if(errorMessage) { %>
+<p style="color: #cd5c5c">
+    <strong><%= errorMessage %></strong>
+</p>
+<% } %>
+
+<% if(successMessage) { %>
+<p style="color: #8b8b8b">
+    <strong><%= successMessage %></strong>
+</p>
+<% } %>
+
+
+<form method="POST" action="/tasks">
+    <input type="text" name="title" autocomplete="off">
+    <input type="hidden" name="_csrf" value="<%= locals._csrf %>">
+    <input type="submit" value="Add Task">
+</form>
+
+<ul>
+<% tasks.forEach(function(task) { %>
+    <li>
+        <%= task.title %> | Completed: <%= task.completed %>
+        <form method="POST" action="/tasks/<%= task._id %>">
+            <input type="hidden" name="taskID" value="<%= task._id %>">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_csrf" value="<%= locals._csrf %>">
+            <input type="submit" value="delete">
+        </form>
+    </li>
+<% }) %>
+</ul>
